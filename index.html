@@ -76,28 +76,55 @@
 
 
 <section class="demo" id="demo"><div class="wrap">
-  <h2>See a study spot in seconds.</h2>
-  <p class="lead">Ask in your own words. NookBrew answers with the nearest matches and shows them on the map.</p>
-  <div class="demo-grid">
-    <div>
-      <div class="chat">
-        <div class="log" id="log" role="log" aria-live="polite"></div>
-        <div class="composer">
-          <input id="ask" type="text" readonly value="Suggest me cafe's that is near CIT-U." aria-label="Sample question">
-          <button id="send" type="button" aria-label="Send question"><span class="msr" aria-hidden="true">send</span></button>
-        </div>
-        <button class="replay" id="replay" type="button">Try it again</button>
-      </div>
-      <p class="note">Ratings are samples for illustration, not real reviews. Locations come from Google Maps.</p>
-    </div>
-    <div>
+  <p class="eyebrow"><span class="msr" aria-hidden="true">near_me</span>Find your spot</p>
+  <h2>Spot your Nook in seconds</h2>
+  <p class="lead">Browse nearby study spots, compare the details that matter, and open a cafe to see more.</p>
+  <div class="explorer">
     <div class="map">
       <iframe id="gmap" title="Map of study spots near CIT-U" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
         src="https://www.google.com/maps?q=Cebu+Institute+of+Technology+University+Cebu+City&amp;output=embed"></iframe>
     </div>
-    <div class="mcard" id="mcard"></div>
-    </div>
+    <aside class="explorer-panel" aria-label="Cafe explorer">
+      <div id="results-view">
+        <div class="explorer-controls">
+          <label class="spot-search">
+            <span class="msr" aria-hidden="true">search</span>
+            <input id="spot-search" type="search" placeholder="Search cafes or vibes..." aria-label="Search cafes or vibes">
+          </label>
+          <button class="brewy-toggle" id="brewy-toggle" type="button" aria-expanded="false" aria-controls="brewy-chat" aria-label="Ask Brewy for a cafe suggestion" title="Ask Brewy">
+            <img src="photos/NookBrew_Logo.png" alt="" width="28" height="28"><span>Brewy</span>
+          </button>
+          <button class="open-filter" id="open-filter" type="button" aria-pressed="false">
+            <span class="msr" aria-hidden="true">schedule</span><span>Open</span>
+          </button>
+        </div>
+        <div class="panel-heading"><h3>Explore Cafes &amp; Study Spaces</h3><span id="spot-count">3 cafes</span></div>
+        <div class="spot-results" id="spot-results" aria-label="Cafe search results"></div>
+      </div>
+      <div class="mcard" id="mcard" aria-live="polite" hidden></div>
+    </aside>
+    <aside class="brewy-chat" id="brewy-chat" aria-label="Brewy cafe assistant" hidden>
+      <div class="brewy-head" id="brewy-drag-handle" tabindex="0" aria-label="Move Brewy chat window with pointer or arrow keys">
+        <img src="photos/NookBrew_Logo.png" alt="" width="38" height="38">
+        <div><h3>Brewy</h3><p>Your #1 Laagan SideQuester Friend</p></div>
+        <button class="brewy-close" id="brewy-close" type="button" aria-label="Close Brewy chat"><span class="msr" aria-hidden="true">close</span></button>
+      </div>
+      <div class="brewy-messages" id="brewy-messages" role="log" aria-live="polite">
+        <p class="brewy-message bot">Hey, I’m Brewy. Tell me what kind of cafe you need and I’ll find a match.</p>
+      </div>
+      <div class="brewy-quick-prompts" role="group" aria-label="Try a sample prompt">
+        <button class="brewy-prompt-choice" type="button">Recommend me something</button>
+        <button class="brewy-prompt-choice" type="button">Nearest cafes near CIT-U</button>
+        <button class="brewy-prompt-choice" type="button">Quiet cafe with good Wi-Fi</button>
+        <button class="brewy-prompt-choice" type="button">Affordable study spot</button>
+      </div>
+      <form class="brewy-form" id="brewy-form">
+        <input id="brewy-prompt" type="text" autocomplete="off" placeholder="Quiet, wifi, budget..." aria-label="Ask Brewy for a cafe">
+        <button type="submit" aria-label="Send to Brewy"><span class="msr" aria-hidden="true">send</span></button>
+      </form>
+    </aside>
   </div>
+  <p class="note">Ratings, hours, Wi-Fi, price, charging and travel details are illustrative. Distance and time use CIT-U as a demo origin; cafe links open search results.</p>
 </div></section>
 </main>
 
