@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NookBrew</title>
-<link rel="icon" type="image/png" href="photos/HD%20LOGO%20.png">
+<link rel="icon" type="image/png" href="/photos/HD LOGO .png">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +35,6 @@
   </div>
   <div class="logo-wrap reveal">
     <img class="logo" src="photos/HD LOGO .png" width="341" height="406" alt="NookBrew logo">
-    <span class="chip" style="top:8%;left:-18%;--t:4.6s;--d:0s">Fast wifi</span>
-    <span class="chip" style="top:46%;right:-24%;--t:5.2s;--d:-1.5s">Quiet</span>
-    <span class="chip" style="bottom:10%;left:-14%;--t:4.9s;--d:-3s">Student budget</span>
   </div>
 </div></section>
 
@@ -59,14 +56,45 @@
 
 <!-- Study room features -->
 <section class="sessions"><div class="wrap">
-  <h2>Study together, no camera needed.</h2>
-  <div class="list">
-    <div><h3>Voice room</h3><p>Talk it out live. Screen sharing is there when you need it.</p></div>
-    <div><h3>Notes channel</h3><p>A separate space for sharing notes, so the voice room stays clear.</p></div>
-    <div><h3>Shared timer</h3><p>One Pomodoro clock for everyone in the room.</p></div>
-    <div><h3>Private link</h3><p>Invite classmates, or get matched by program and subject.</p></div>
+  <h2>Study together with different students around Cebu!</h2>
+  <div class="bento">
+    <article class="b-voice">
+    <div class="room" aria-hidden="true">
+  <span class="av a1 talking"><img src="photos/icon1.png" alt="MJ" loading="lazy" decoding="async" draggable="false"></span>
+  <span class="av a2"><img src="photos/icon2.png" alt="KA" loading="lazy" decoding="async" draggable="false"></span>
+  <span class="av a3"><img src="photos/icon3.png" alt="RT" loading="lazy" decoding="async" draggable="false"></span>
+  <span class="av a4">+2</span>
+</div>
+  
+  <div>
+  <h3>Voice Rooms</h3>
+  <p>Talk and collaborate with other students in real-time.</p>
   </div>
-</div></section>
+    </article>
+
+  <article class="b-notes">
+    <span class="b-ico msr" aria-hidden="true">sticky_note_2</span>
+    <h3>Chat Channel Rooms</h3>
+    <p>Share notes, study materials, and other resources with your study buddies!</p>
+  </article>
+
+  <article class="b-timer">
+    <span class="b-ico msr" aria-hidden="true">timer</span>
+    <div class="ring" aria-hidden="true">25:00</div>
+    <h3>Pomodoro Timer</h3>
+    <p>Set your total study time and NookBrew works out the focus and break cycles.</p>
+  </article>
+
+  <article class="b-link">
+    <div>
+      <span class="b-ico msr" aria-hidden="true">link</span>
+      <h3>Collaborate in two ways.</h3>
+      <p>Invite your friends and classmates, or get matched by certain groups with the same study field of interest.</p>
+    </div>
+    <ul class="tags" aria-hidden="true"><li>Object-Oriented Programming 1</li><li>General Chemistry</li><li>Drafting</li><li>Accounting</li></ul>
+    </article>
+  </div>
+</div></article>
 
 <!-- Tool cards carousel -->
 <section class="tools" id="tools">
@@ -96,7 +124,7 @@
             <input id="spot-search" type="search" placeholder="Search cafes or vibes..." aria-label="Search cafes or vibes">
           </label>
           <button class="brewy-toggle" id="brewy-toggle" type="button" aria-expanded="false" aria-controls="brewy-chat" aria-label="Ask Brewy for a cafe suggestion" title="Ask Brewy">
-            <img src="photos/NookBrew_Logo.png" alt="" width="28" height="28"><span>Brewy</span>
+            <img src="/photos/HD LOGO .png" alt="" width="28" height="28"><span>Brewy</span>
           </button>
           <button class="open-filter" id="open-filter" type="button" aria-pressed="false">
             <span class="msr" aria-hidden="true">schedule</span><span>Open</span>
@@ -109,12 +137,12 @@
     </aside>
     <aside class="brewy-chat" id="brewy-chat" aria-label="Brewy cafe assistant" hidden>
       <div class="brewy-head" id="brewy-drag-handle" tabindex="0" aria-label="Move Brewy chat window with pointer or arrow keys">
-        <img src="photos/NookBrew_Logo.png" alt="" width="38" height="38">
+        <img src="/photos/HD LOGO .png" alt="" width="38" height="38">
         <div><h3>Brewy</h3><p>Your #1 Laagan SideQuester Friend</p></div>
         <button class="brewy-close" id="brewy-close" type="button" aria-label="Close Brewy chat"><span class="msr" aria-hidden="true">close</span></button>
       </div>
       <div class="brewy-messages" id="brewy-messages" role="log" aria-live="polite">
-        <p class="brewy-message bot">Hey, Iâ€™m Brewy. Tell me what kind of cafe you need and Iâ€™ll find a match.</p>
+        <p class="brewy-message bot">Hey, I'am Brewy. Tell me what kind of cafe you need and I'll find a match.</p>
       </div>
       <div class="brewy-quick-prompts" role="group" aria-label="Try a sample prompt">
         <button class="brewy-prompt-choice" type="button">Recommend me something</button>
