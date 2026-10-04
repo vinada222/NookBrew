@@ -1,3 +1,4 @@
+// Navigation + section active states
 const dockLinks=[...document.querySelectorAll(".dock a")];
 function setActive(id){dockLinks.forEach(a=>{const on=a.getAttribute("href")==="#"+id;a.classList.toggle("active",on);if(on)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")})}
 const dockIds=new Map([[document.getElementById("about"),"about"],[document.getElementById("features"),"features"],[document.getElementById("demo"),"demo"]]);
@@ -16,7 +17,7 @@ dockLinks.forEach(a=>a.addEventListener("click",e=>{
 }));
 addEventListener("scrollend",unlockDock);
 
-//Google Maps embeded
+// Demo cafe data + Google Maps embed
 const embed=t=>"https://www.google.com/maps?q="+encodeURIComponent(t)+"&output=embed";
 const home=embed("Cebu Institute of Technology University Cebu City");
 const spots=[
@@ -43,6 +44,7 @@ function addResultMeta(parent,iconName,text){
   const icon=document.createElement("span");icon.className="msr";icon.setAttribute("aria-hidden","true");icon.textContent=iconName;
   item.append(icon,document.createTextNode(text));parent.appendChild(item);
 }
+// Render cafe results list
 function renderResults(){
   const query=searchInput.value.trim().toLowerCase();
   const matches=spots.map((spot,index)=>({spot,index})).filter(({spot})=>{
@@ -73,6 +75,7 @@ function renderResults(){
     button.addEventListener("click",()=>pick(index));spotResults.appendChild(button);
   });
 }
+// Detail card + favorites
 function showResults(){card.hidden=true;card.classList.remove("show");resultsView.hidden=false}
 function pick(index){
   const spot=spots[index];gmap.src=embed(spot.m);
@@ -193,6 +196,7 @@ function answerBrewy(query){
   appendBrewyMessage(answer+" Cafe details are illustrative demo data.","bot");
   matches.forEach(addBrewySuggestion);
 }
+// Brewy assistant behavior
 brewyToggle.addEventListener("click",()=>{
   const opening=brewyChat.hidden;brewyChat.hidden=!opening;brewyToggle.setAttribute("aria-expanded",String(opening));
   if(opening){
@@ -247,7 +251,7 @@ brewyDragHandle.addEventListener("keydown",event=>{
   placeBrewyChat(left+movement[0],top+movement[1]);
 });
 
-//Waitlist - I'll use supabase for my back-end
+// Waitlist flow
 (() => {
   // Put your form or API address here (Supabase or your own backend).
 
