@@ -65,8 +65,9 @@ section{padding:96px 0}
 .hero p{margin:24px 0 32px;font-size:1.2rem;color:var(--muted)}
 .logo-wrap{position:relative;justify-self:center;isolation:isolate}
 .logo-wrap::before{content:"";position:absolute;inset:-8%;z-index:0;border-radius:50%;background:radial-gradient(ellipse,rgba(217,125,70,.72) 0%,rgba(217,125,70,.4) 38%,rgba(217,125,70,0) 72%);filter:blur(30px);pointer-events:none}
-.logo{position:relative;z-index:1;width:min(340px,72vw);height:auto;display:block;filter:drop-shadow(0 18px 22px rgba(62,42,32,.28));translate:0 0;animation:logo-float 2s ease-in-out infinite}
-@keyframes logo-float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+/* Adapted from https://stackoverflow.com/a/59136028 by Awais, CC BY-SA 4.0. */
+.logo{position:relative;z-index:1;width:min(340px,72vw);height:auto;display:block;filter:drop-shadow(0 18px 22px rgba(62,42,32,.28));animation-name:floating;animation-duration:3s;animation-iteration-count:infinite;animation-timing-function:ease-in-out}
+@keyframes floating{from{transform:translate(0,0)}65%{transform:translate(0,15px)}to{transform:translate(0,0)}}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .logo{filter:drop-shadow(0 0 1.5px rgba(247,239,227,.7)) drop-shadow(0 18px 24px rgba(0,0,0,.45))}}
 :root[data-theme="dark"] .logo{filter:drop-shadow(0 0 1.5px rgba(247,239,227,.7)) drop-shadow(0 18px 24px rgba(0,0,0,.45))}
 .chip{position:absolute;white-space:nowrap;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:700;font-size:.95rem;box-shadow:rgba(0,0,0,10%) 4px 4px 14px;animation:bob calc(var(--t)*var(--k)) ease-in-out infinite alternate;animation-delay:var(--d)}
