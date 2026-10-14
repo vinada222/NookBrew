@@ -171,6 +171,30 @@
   </div>
 </footer>
 
+<dialog class="menu-image-dialog" id="menu-image-dialog" aria-labelledby="menu-image-title">
+  <div class="menu-image-dialog-content">
+    <div class="menu-image-dialog-header">
+      <h2 id="menu-image-title">Menu photo</h2>
+      <button class="menu-image-close" id="menu-image-close" type="button" aria-label="Close menu photo"><span class="msr" aria-hidden="true">close</span></button>
+    </div>
+    <div class="menu-image-viewport"><img id="menu-image" alt=""></div>
+    <div class="menu-image-zoom" aria-label="Zoom controls">
+      <button id="menu-zoom-out" type="button" aria-label="Zoom out"><span class="msr" aria-hidden="true">remove</span></button>
+      <button id="menu-zoom-reset" type="button">Reset zoom</button>
+      <button id="menu-zoom-in" type="button" aria-label="Zoom in"><span class="msr" aria-hidden="true">add</span></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="menu-submission-dialog" id="menu-submission-dialog" aria-labelledby="menu-submission-title">
+  <div class="menu-submission-content">
+    <span class="msr menu-submission-icon" aria-hidden="true">check_circle</span>
+    <h2 id="menu-submission-title">Thanks for your submission!</h2>
+    <p>Photo uploads and system review are not connected yet, so your selected photo has not been sent to NookBrew.</p>
+    <button class="menu-action" id="menu-submission-close" type="button">Got it</button>
+  </div>
+</dialog>
+
 <!-- Waitlist popup -->
 <dialog class="waitlist" id="waitlist" aria-labelledby="wl-title">
   <div class="wl-card">
@@ -224,4 +248,3 @@
 <script src="main.js" defer></script>
 </body>
 </html>
-

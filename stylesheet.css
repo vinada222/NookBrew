@@ -194,6 +194,40 @@ section{padding:96px 0}
 .mcard .spot-link:hover{border-color:var(--terracotta);color:var(--terracotta)}
 .spot-link>.msr{font-size:18px}
 .spot-link-external{font-size:14px!important;color:var(--muted)}
+.mcard button.spot-link{cursor:pointer}
+.menu-view-title{margin:0 0 10px;font-size:1.2rem}
+.menu-gallery{display:grid;gap:10px;margin:12px 0}
+.menu-empty{padding:14px;border:1px dashed var(--line);border-radius:var(--r-input);color:var(--muted);font-size:.86rem!important}
+.menu-photo{display:grid;gap:6px;width:100%;padding:8px;border:1px solid var(--line);border-radius:var(--r-input);background:var(--bg);color:var(--text);text-align:left;cursor:zoom-in}
+.menu-photo img{display:block;width:100%;height:auto;background:var(--surface);border-radius:8px}
+.menu-photo span{overflow-wrap:anywhere;font-size:.8rem}
+.demo-disclosure{margin:12px 0;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-input);background:color-mix(in srgb,var(--terracotta) 10%,var(--bg));font-size:.78rem!important;line-height:1.4}
+.menu-section-title{margin:16px 0 8px;font-size:1rem}
+.menu-upload-form{display:grid;gap:10px}
+.menu-field-label{display:grid;gap:6px;font-size:.82rem;font-weight:700}
+.menu-role,.menu-field-label input{width:100%;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:var(--r-input);background:var(--bg);color:var(--text);font:500 .85rem var(--body)}
+.menu-field-label input[type=file]{font-size:.75rem}
+.menu-action,.menu-remove-button{padding:9px 12px;border:1px solid var(--brand);border-radius:var(--r-input);background:var(--brand);color:var(--on-brand);font:700 .82rem var(--body);cursor:pointer}
+.menu-action:hover,.menu-remove-button:hover{border-color:var(--terracotta);background:color-mix(in srgb,var(--brand) 88%,var(--terracotta))}
+.menu-feedback{min-height:1.3em;color:var(--muted);font-size:.8rem!important}
+.menu-image-dialog{width:min(960px,95vw);max-width:none;max-height:92vh;padding:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--text);box-shadow:var(--glass-shadow)}
+.menu-image-dialog::backdrop{background:rgba(20,14,10,.78)}
+.menu-image-dialog-content{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:14px}
+.menu-image-dialog-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.menu-image-dialog-header h2{font-size:1.15rem;overflow-wrap:anywhere}
+.menu-image-close,.menu-image-zoom button{display:grid;place-items:center;min-width:40px;min-height:40px;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r-input);background:var(--bg);color:var(--text);font:700 .85rem var(--body);cursor:pointer}
+.menu-image-viewport{max-height:70vh;overflow:auto;border-radius:10px;background:color-mix(in srgb,var(--text) 6%,var(--bg))}
+.menu-image-viewport img{display:block;width:100%;height:auto;max-width:none;margin:0 auto}
+.menu-image-zoom{display:flex;justify-content:center;gap:8px}
+.menu-image-zoom .msr{font-size:20px}
+.menu-submission-dialog{width:min(420px,calc(100vw - 32px));padding:0;border:1px solid rgba(247,239,227,.16);border-radius:18px;background:radial-gradient(ellipse at 100% 0%,rgba(217,125,70,.28),transparent 65%),linear-gradient(145deg,#3b281f,#2A1D16 72%);color:#F7EFE3;box-shadow:0 30px 80px rgba(20,12,8,.55),inset 0 1px 0 rgba(247,239,227,.12)}
+.menu-submission-dialog::backdrop{background:rgba(20,14,10,.68);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.menu-submission-content{display:grid;justify-items:center;gap:12px;padding:28px;text-align:center}
+.menu-submission-icon{color:var(--sage);font-size:42px}
+.menu-submission-content h2{font-size:1.4rem}
+.menu-submission-content p{color:#CDBBA6;font-size:.95rem}
+.menu-submission-content .menu-action{min-width:120px;border-color:var(--terracotta);background:var(--terracotta);color:#2A1D16}
+.menu-submission-content .menu-action:hover{border-color:#E89561;background:#E89561}
 .rating-list{display:grid;gap:10px;margin-top:16px}
 .rating-row{display:grid;grid-template-columns:96px minmax(40px,1fr) auto;align-items:center;gap:10px;font-size:.85rem;line-height:1.2}
 .rating-category{display:flex;align-items:center;gap:6px;min-width:0}

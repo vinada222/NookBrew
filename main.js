@@ -21,11 +21,12 @@ addEventListener("scrollend",unlockDock);
 const embed=t=>"https://www.google.com/maps?q="+encodeURIComponent(t)+"&output=embed";
 const home=embed("Cebu Institute of Technology University Cebu City");
 const spots=[
- {n:"Uncle Brew Prime CIT-U",a:"Near the CIT-U campus, Cebu City",r:[["Wifi","4.2"],["Price","4.6"],["Service","4.3"],["Quiet","3.9"]],charging:false,wifiRequiresOrder:true,openNow:true,hours:"7 AM-10 PM",distance:"0.3 km",travelTime:"4 min walk",priceRange:"₱",m:"Uncle Brew Prime CIT-U Cebu City"},
- {n:"Mindspace Study Hub",a:"Urgello, Cebu City",r:[["Wifi","4.7"],["Price","4.5"],["Service","4.4"],["Quiet","4.8"]],charging:true,wifiRequiresOrder:false,openNow:true,hours:"8 AM-11 PM",distance:"0.7 km",travelTime:"9 min walk",priceRange:"₱₱",m:"Mindspace Study Hub Urgello Cebu City"},
- {n:"TOMORO COFFEE - Elizabeth Mall (E-Mall)",a:"G/F E2, Elizabeth Mall, N. Bacalso Ave, Cebu City",r:[["Wifi","4.0"],["Price","4.4"],["Service","4.5"],["Quiet","3.8"]],charging:true,wifiRequiresOrder:true,openNow:false,hours:"10 AM-9 PM",distance:"1.2 km",travelTime:"6 min drive",priceRange:"₱₱",m:"TOMORO COFFEE Elizabeth Mall Cebu 7Q257VXW+84"}
+ {n:"Uncle Brew Prime CIT-U",a:"Near the CIT-U campus, Cebu City",r:[["Wifi","4.2"],["Price","4.6"],["Service","4.3"],["Quiet","3.9"]],charging:false,wifiRequiresOrder:true,openNow:true,hours:"7 AM-10 PM",distance:"0.3 km",travelTime:"4 min walk",priceRange:"₱",m:"Uncle Brew Prime CIT-U Cebu City",socialUrl:"https://www.facebook.com/unclebrewphilippines",menuPhotos:[{name:"Uncle Brew",url:"photos/UBMenu1.jpg"},{name:"Uncle Brew menu 2",url:"photos/UBMenu2.jpg"}]},
+ {n:"Bo's Coffee (SM Seaside)",a:"SM Seaside City Cebu, Cebu City",r:[["Wifi","4.7"],["Price","4.5"],["Service","4.4"],["Quiet","4.8"]],charging:true,wifiRequiresOrder:false,openNow:true,hours:"8 AM-11 PM",distance:"0.7 km",travelTime:"9 min walk",priceRange:"₱₱",m:"Bo's Coffee SM Seaside City Cebu Cebu City",socialUrl:"https://www.facebook.com/BosCoffeeSMSeaside", menuPhotos:[{name:"Bo's Coffee",url:"/photos/Bo'sMenu1.png"},{name:"Bo's Coffee",url:"/photos/Bo'sMenu2.png"}]},
+ {n:"TOMORO COFFEE - Elizabeth Mall (E-Mall)",a:"G/F E2, Elizabeth Mall, N. Bacalso Ave, Cebu City",r:[["Wifi","4.0"],["Price","4.4"],["Service","4.5"],["Quiet","3.8"]],charging:true,wifiRequiresOrder:true,openNow:true,hours:"10 AM-9 PM",distance:"1.2 km",travelTime:"6 min drive",priceRange:"₱₱",m:"TOMORO COFFEE Elizabeth Mall Cebu 7Q257VXW+84",socialUrl:"https://www.facebook.com/tomorocoffee.ph/",menuPhotos:[{name:"Tomoro Coffee",url:"photos/TomoroMenu.png"}]}
 ];
 const savedSpotNames=new Set();
+const maxMenuPhotoSize=10*1024*1024;
 
 
 const gmap=document.getElementById("gmap"),card=document.getElementById("mcard"),explorer=document.querySelector(".explorer"),
@@ -35,6 +36,11 @@ const gmap=document.getElementById("gmap"),card=document.getElementById("mcard")
  brewyChat=document.getElementById("brewy-chat"),brewyClose=document.getElementById("brewy-close"),
  brewyForm=document.getElementById("brewy-form"),brewyPrompt=document.getElementById("brewy-prompt"),
  brewyMessages=document.getElementById("brewy-messages"),brewyDragHandle=document.getElementById("brewy-drag-handle");
+const menuImageDialog=document.getElementById("menu-image-dialog"),
+ menuImage=document.getElementById("menu-image"),
+ menuImageTitle=document.getElementById("menu-image-title");
+const menuSubmissionDialog=document.getElementById("menu-submission-dialog");
+let menuImageZoom=1;
 let openOnly=false;
 let brewyDrag=null;
 
@@ -77,6 +83,60 @@ function renderResults(){
 }
 // Detail card + favorites
 function showResults(){card.hidden=true;card.classList.remove("show");resultsView.hidden=false}
+function openMenuImage(photo){
+  menuImageZoom=1;
+  menuImage.src=photo.url;
+  menuImage.alt=photo.name;
+  menuImageTitle.textContent=photo.name;
+  menuImage.style.width="100%";
+  menuImageDialog.showModal();
+}
+function renderMenu(spot,index,notice=""){
+  card.replaceChildren();
+  const back=document.createElement("button");back.type="button";back.className="detail-back";
+  const backIcon=document.createElement("span");backIcon.className="msr";backIcon.setAttribute("aria-hidden","true");backIcon.textContent="arrow_back";
+  back.append(backIcon,document.createTextNode("Cafe details"));back.addEventListener("click",()=>pick(index));
+  const title=document.createElement("h3");title.className="menu-view-title";title.textContent=spot.n;
+  const gallery=document.createElement("div");gallery.className="menu-gallery";gallery.setAttribute("aria-label","Menu photos");
+  const photos=spot.menuPhotos||[];
+  if(!photos.length){
+    const empty=document.createElement("p");empty.className="menu-empty";empty.textContent="No menu photos are available yet.";
+    gallery.appendChild(empty);
+  }else{
+    photos.forEach(photo=>{
+      const button=document.createElement("button");button.type="button";button.className="menu-photo";
+      button.setAttribute("aria-label","View and zoom menu photo: "+photo.name);
+      const image=document.createElement("img");image.src=photo.url;image.alt=photo.name;image.loading="lazy";
+      button.append(image);button.addEventListener("click",()=>openMenuImage(photo));gallery.appendChild(button);
+    });
+  }
+  const formTitle=document.createElement("h4");formTitle.className="menu-section-title";formTitle.textContent="Found something new? Submit an updated menu photo below.";
+  const form=document.createElement("form");form.className="menu-upload-form";
+  const roleLabel=document.createElement("label");roleLabel.className="menu-field-label";roleLabel.textContent="I am a";
+  const roleSelect=document.createElement("select");roleSelect.className="menu-role";roleSelect.setAttribute("aria-label","Contributor type");
+  [["customer","Customer"],["cafe staff","Cafe staff"]].forEach(([value,label])=>{const option=document.createElement("option");option.value=value;option.textContent=label;roleSelect.appendChild(option)});
+  roleLabel.appendChild(roleSelect);
+  const fileLabel=document.createElement("label");fileLabel.className="menu-field-label";fileLabel.textContent="Choose menu photos (images up to 10 MB each)";
+  const fileInput=document.createElement("input");fileInput.type="file";fileInput.accept="image/*";fileInput.multiple=true;fileInput.setAttribute("aria-label","Choose menu photos");fileLabel.appendChild(fileInput);
+  const submit=document.createElement("button");submit.type="submit";submit.className="menu-action";submit.textContent="Submit";
+  const feedback=document.createElement("p");feedback.className="menu-feedback";feedback.setAttribute("role","status");feedback.textContent=notice;
+  form.append(roleLabel,fileLabel,submit,feedback);
+  form.addEventListener("submit",event=>{
+    event.preventDefault();
+    const files=[...fileInput.files];
+    if(!files.length){feedback.textContent="Choose at least one image to preview.";return}
+    const errors=[];
+    files.forEach(file=>{
+      if(!file.type.startsWith("image/")){errors.push(file.name+": choose an image file.");return}
+      if(file.size>maxMenuPhotoSize){errors.push(file.name+": the image is larger than 10 MB.");return}
+    });
+    const validCount=files.length-errors.length;
+    renderMenu(spot,index,errors.join(" "));
+    if(validCount)menuSubmissionDialog.showModal();
+  });
+  card.append(back,title,gallery,formTitle,form);
+  card.classList.add("show");
+}
 function pick(index){
   const spot=spots[index];gmap.src=embed(spot.m);
   spotResults.querySelectorAll(".spot-result").forEach(button=>button.setAttribute("aria-pressed",String(Number(button.dataset.index)===index)));
@@ -110,11 +170,13 @@ function pick(index){
   const links=document.createElement("div");links.className="spot-links";links.setAttribute("aria-label","Cafe links");
   const linkOptions=[
     ["menu_book","Menu",spot.n+" Cebu City menu"],
-    ["share","Socials",spot.n+" Cebu City official Facebook Instagram"],
+    ["share","Socials",spot.n+" Cebu City official Facebook Instagram",spot.socialUrl],
     ["language","Website",spot.n+" Cebu City official website"]
   ];
-  linkOptions.forEach(([iconName,labelText,query])=>{
-    const link=document.createElement("a");link.className="spot-link";link.href="https://www.google.com/search?q="+encodeURIComponent(query);link.target="_blank";link.rel="noopener noreferrer";
+  linkOptions.forEach(([iconName,labelText,query,url])=>{
+    const link=document.createElement(labelText==="Menu"?"button":"a");link.className="spot-link";
+    if(labelText==="Menu"){link.type="button";link.addEventListener("click",()=>renderMenu(spot,index))}
+    else{link.href=url||"https://www.google.com/search?q="+encodeURIComponent(query);link.target="_blank";link.rel="noopener noreferrer"}
     const icon=document.createElement("span");icon.className="msr";icon.setAttribute("aria-hidden","true");icon.textContent=iconName;
     const label=document.createElement("span");label.textContent=labelText;
     const external=document.createElement("span");external.className="msr spot-link-external";external.setAttribute("aria-hidden","true");external.textContent="open_in_new";
@@ -147,7 +209,18 @@ function pick(index){
   addAmenity("Charging ports","power",spot.charging,"Available","Unavailable");
   card.append(back,head,address,details,links,ratings,amenities);card.classList.add("show");
 }
-searchInput.addEventListener("input",renderResults);
+  document.getElementById("menu-zoom-in").addEventListener("click",()=>{
+    menuImageZoom=Math.min(4,menuImageZoom+0.25);menuImage.style.width=(menuImageZoom*100)+"%";
+  });
+  document.getElementById("menu-zoom-out").addEventListener("click",()=>{
+    menuImageZoom=Math.max(1,menuImageZoom-0.25);menuImage.style.width=(menuImageZoom*100)+"%";
+  });
+  document.getElementById("menu-zoom-reset").addEventListener("click",()=>{
+    menuImageZoom=1;menuImage.style.width="100%";
+  });
+  document.getElementById("menu-image-close").addEventListener("click",()=>menuImageDialog.close());
+  document.getElementById("menu-submission-close").addEventListener("click",()=>menuSubmissionDialog.close());
+  searchInput.addEventListener("input",renderResults);
 openFilter.addEventListener("click",()=>{openOnly=!openOnly;openFilter.setAttribute("aria-pressed",String(openOnly));renderResults()});
 renderResults();
 function appendBrewyMessage(text,kind){
