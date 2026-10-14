@@ -66,6 +66,7 @@ section{padding:96px 0}
 @keyframes bob{to{transform:translateY(-10px)}}
 .hero .reveal{opacity:0;animation:rise .8s cubic-bezier(.16,1,.3,1) forwards}
 .hero .reveal:nth-child(2){animation-delay:.12s}.hero .reveal:nth-child(3){animation-delay:.24s}
+.hero .logo-wrap.reveal{animation:rise .8s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
 /* Features layout */
@@ -454,7 +455,7 @@ html.wl-open{overflow:hidden}
 .sessions{--tile:#4A352A;background:var(--brand);color:#F7EFE3}
 .sessions .eyebrow{margin:0 0 20px;color:var(--on-brand);font:700 .85rem var(--body);letter-spacing:.16em;text-transform:uppercase}
 .sessions h2{font-size:clamp(2rem,4.5vw,3.4rem);max-width:18ch;margin-bottom:48px}
-.bento{display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-areas:"voice notes timer" "voice link link";gap:16px}
+.bento{display:grid;grid-template-columns:1.25fr 2fr;grid-template-areas:"voice timer" "voice link";gap:16px}
 .bento article{display:flex;flex-direction:column;gap:10px;padding:28px;background:var(--tile);border:1px solid rgba(247,239,227,.14);border-radius:var(--r-tile)}
 .bento h3{font-size:1.4rem}
 .bento h3+p{margin-top:10px}
@@ -484,7 +485,7 @@ html.wl-open{overflow:hidden}
 
 @media (max-width:767px){
   .sessions h2{margin-bottom:24px}
-  .bento{grid-template-columns:1fr;grid-template-areas:"voice" "notes" "timer" "link";gap:12px}
+  .bento{grid-template-columns:1fr;grid-template-areas:"voice" "timer" "link";gap:12px}
   .bento article{padding:22px 20px}
   .room{padding:6px 0 18px}
   .av{width:88px;height:88px;margin-left:-18px;font-size:1.05rem}

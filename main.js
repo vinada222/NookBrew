@@ -17,6 +17,25 @@ dockLinks.forEach(a=>a.addEventListener("click",e=>{
 }));
 addEventListener("scrollend",unlockDock);
 
+const logoWrap=document.querySelector(".hero .logo-wrap");
+if(logoWrap){
+  const reduceLogoMotion=matchMedia("(prefers-reduced-motion: reduce)");
+  let logoFloat;
+  const updateLogoFloat=()=>{
+    if(logoFloat)logoFloat.cancel();
+    if(reduceLogoMotion.matches)return;
+    logoFloat=logoWrap.animate([
+      {translate:"0 0"},
+      {translate:"5% 15%"},
+      {translate:"10% 5%"},
+      {translate:"0 15%"},
+      {translate:"0 0"}
+    ],{duration:5000,iterations:Infinity,easing:"ease-in-out"});
+  };
+  reduceLogoMotion.addEventListener("change",updateLogoFloat);
+  updateLogoFloat();
+}
+
 const pomodoroDisplay=document.querySelector(".ring");
 if(pomodoroDisplay){
   const pomodoroDuration=25*60;
