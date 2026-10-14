@@ -288,7 +288,7 @@ footer{padding:14px 0 28px;border-top:1px solid var(--line);color:var(--muted);f
   .hero .btn{width:min(100%,420px);justify-content:center}
   .logo-wrap{order:-1;margin:8px 0 24px}.logo{width:170px}.chip{display:none}
   .explorer{overflow:visible}
-  .map{min-height:300px;aspect-ratio:1.2}
+  .map{min-height:240px;aspect-ratio:4/3}
   .explorer-panel{position:relative;inset:auto;width:100%;max-height:none;margin-top:-14px}
   .spot-results{max-height:340px}
   .rating-row{grid-template-columns:88px minmax(32px,1fr) auto;gap:8px;font-size:.8rem}
