@@ -278,7 +278,7 @@ footer{padding:14px 0 28px;border-top:1px solid var(--line);color:var(--muted);f
 /* Responsive layout */
 @media (max-width:767px){
   body{overflow-x:hidden}
-  .tools{--speed:60s}
+  .tools{--speed:100s}
   section{padding:64px 0}
   .demo{padding-top:48px}
   .wrap{padding:0 16px}
