@@ -17,6 +17,22 @@ dockLinks.forEach(a=>a.addEventListener("click",e=>{
 }));
 addEventListener("scrollend",unlockDock);
 
+const pomodoroDisplay=document.querySelector(".ring");
+if(pomodoroDisplay){
+  const pomodoroDuration=25*60;
+  const pomodoroEndsAt=Date.now()+pomodoroDuration*1000;
+  const updatePomodoro=()=>{
+    const secondsLeft=Math.max(0,Math.ceil((pomodoroEndsAt-Date.now())/1000));
+    const minutes=Math.floor(secondsLeft/60);
+    const seconds=secondsLeft%60;
+    pomodoroDisplay.textContent=String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0");
+    pomodoroDisplay.style.setProperty("--timer-progress",(secondsLeft/pomodoroDuration*100)+"%");
+    if(secondsLeft===0)clearInterval(pomodoroInterval);
+  };
+  const pomodoroInterval=setInterval(updatePomodoro,1000);
+  updatePomodoro();
+}
+
 // Demo cafe data + Google Maps embed
 const embed=t=>"https://www.google.com/maps?q="+encodeURIComponent(t)+"&output=embed";
 const home=embed("Cebu Institute of Technology University Cebu City");
